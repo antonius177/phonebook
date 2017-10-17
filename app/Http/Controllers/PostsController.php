@@ -1,5 +1,6 @@
 <?php
-
+use App\Phone
+use\App\Http\Requests
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

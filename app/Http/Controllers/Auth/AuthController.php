@@ -35,9 +35,12 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Guard $auth, Registrar $registrar)
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+       $this->auth = $auth;
+		$this->registrar = $registrar;
+
+		$this->middleware('guest', ['except' => 'getLogout']);
     }
 
     /**

@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use App\Phone;
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+use App\Http\Requests\PhoneRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
+
 
 class phonesController extends Controller
 {
@@ -13,6 +19,13 @@ class phonesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+	  public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+	 
+	 
     public function index()
     {
         //
@@ -37,6 +50,8 @@ class phonesController extends Controller
     public function store(Request $request)
     {
         //
+		 Phone::create($request->all());
+        return redirect('contacts');
     }
 
     /**
@@ -71,6 +86,8 @@ class phonesController extends Controller
     public function update(Request $request, $id)
     {
         //
+		 Phone::create($request->all());
+        return redirect('contacts');
     }
 
     /**
@@ -82,5 +99,9 @@ class phonesController extends Controller
     public function destroy($id)
     {
         //
+		$phone = Phone::findOrFail($id);
+        $phone->delete();
+
+        return redirect('contacts');
     }
 }
